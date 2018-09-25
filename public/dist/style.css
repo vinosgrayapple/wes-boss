@@ -682,8 +682,8 @@ label {
           order: -1;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       .nav__section--user .avatar {
-        min-width: 20px;
-        height: 20px; }
+        min-width: 30px;
+        height: 30px; }
       .nav__section--user svg {
         display: none; }
   .nav__item {

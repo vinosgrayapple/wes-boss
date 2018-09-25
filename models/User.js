@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const md5 = require('md5');
 const validator = require('validator');
-const mongodbErrorHandler = require('mongoose-mongodb-erors');
-const passportLocalMongoose = require('password-local-mongoose')
+const mongodbErrorHandler = require('mongoose-mongodb-errors');
+const passportLocalMongoose = require('passport-local-mongoose')
 
 
 const userSchema = new mongoose.Schema({
@@ -19,15 +19,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: 'Please supply a name',
         trim: true
-    },
-    password: {
-        type: String,
-        required: 'Please supply a name',
-        trim: true
     }
 })
+userSchema.virtual('gravatar').get(function () {
+    const hash = md5(this.email)
+    return `https://gravatar.com/avatar/${hash}?s=200`
+})
 userSchema.plugin(passportLocalMongoose, {
-    userField: 'email'
+    usernameField: 'email'
 })
 userSchema.plugin(mongodbErrorHandler)
 module.exports = mongoose.model('User', userSchema)
