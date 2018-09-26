@@ -1,0 +1,12 @@
+extends layout
+
+
+block content
+    .inner
+        form.form(method="POST")
+            pre(style="font-size:18px") Reset Password for <strong>#{name}</strong> with email: <strong>#{email}</strong>
+            label(for="password") Password
+            input(name="password" type="password")
+            label(for="password-confirm") Confirm Password
+            input(name="password-confirm" type="password")
+            input.button(type="submit" value=title)

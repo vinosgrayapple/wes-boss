@@ -20,7 +20,8 @@ mongoose.connection.on('error', (err) => {
 });
 
 // READY?! Let's go!
-
+// temp send email
+require('./handlers/mail')
 
 //  import of all models
 

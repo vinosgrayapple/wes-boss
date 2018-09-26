@@ -1,4 +1,4 @@
-mixin forgotForm()
+mixin forgotForm(user)
     form.form(action="/account/forgot" method="POST")
         h2 I forgot my password!
         label(for="email") Email
