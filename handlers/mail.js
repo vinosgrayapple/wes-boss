@@ -13,23 +13,21 @@ const transport = nodemailer.createTransport({
         pass: process.env.MAIL_PASS
     }
 })
-
-const mailOptions = {
-    from: 'Комаричев Сергей <komarichev.aw@gmail.com>',
-    to: 'komarichev@artwinery.com.ua',
-    subject: 'Just trying things out!',
-    html: `
-    Hey I <strong>Love</strong> Gmail
-    `,
-    text: 'I ***love*** you!'
+const generateHTML = (filename, options = {}) => {
+    const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options)
+    const inlined = juice(html)
+    return inlined
 }
-transport.sendMail(
-    mailOptions,
-    function (err, info) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(info);
-        }
+exports.send = async (options) => {
+    const html = generateHTML(options.filename, options)
+    const text = htmlToText.fromString(html)
+    const mailOptions = {
+        from: `Комаричев Сергей <noreply@komarichev.com>`,
+        to: options.user.email,
+        subject: options.subject,
+        html,
+        text
     }
-)
+    const sendMail = promisify(transport.sendMail, transport)
+    return sendMail(mailOptions)
+}

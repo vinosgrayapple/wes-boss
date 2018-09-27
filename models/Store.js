@@ -34,7 +34,12 @@ const storeSchema = new mongoose.Schema({
             required: 'You must supply coordinates!'
         }
     },
-    photo: String
+    photo: String,
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: 'You must suply an author'
+    }
 })
 
 storeSchema.pre('save', async function (next) {

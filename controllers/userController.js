@@ -22,6 +22,8 @@ exports.validateRegister = (req, res, next) => {
         remove_extension: false,
         gmail_remove_subaddress: false
     })
+
+
     req.checkBody('password', 'Password cannot be Blank!').notEmpty()
     req.checkBody('password-confirm', 'Confirmed Password cannot be Blank!').notEmpty()
     req.checkBody('password-confirm', 'OOps! Your password do not match!').equals(req.body.password)
@@ -45,13 +47,12 @@ exports.register = async (req, res, next) => {
         name: req.body.name
     })
     const register = promisify(User.register, User)
+    console.log(user, req.body.password);
     await register(user, req.body.password)
         .catch(console.log)
     next() //pass to authController
 }
 exports.editAccount = (req, res) => {
-
-
     res.render('editAccount', {
         title: 'Edit Your Account'
     })
