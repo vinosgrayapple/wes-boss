@@ -9,7 +9,6 @@ async function autocomplete(input, latInput, lngInput) {
     input.on('keydown', e => {
         if (e.keyCode === 13) {
             e.preventDefault();
-
         }
     })
 }
