@@ -188,3 +188,11 @@ exports.getHersts = async (req, res) => {
     })
     // res.json(stores)
 }
+exports.getTopStores = async (req, res) => {
+    const stores = await Store.getTopStores()
+    res.render('topStores', {
+        title: '★ Top Stores!',
+        stores
+    })
+    // res.json(stores)
+}
