@@ -20,6 +20,7 @@ router.post('/add/:id',
     catchErrors(storeController.resize),
     catchErrors(storeController.updateStore))
 router.get('/stores', catchErrors(storeController.getStores))
+router.get('/stores/page/:page', catchErrors(storeController.getStores))
 router.get('/store/:id/edit', catchErrors(storeController.editStore))
 router.get('/stores/:slug', catchErrors(storeController.getStoreBySlug))
 router.get('/tags', catchErrors(storeController.getStoresByTag))
